@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.functional import SimpleLazyObject
 from django.utils.itercompat import is_iterable
 
 class Trigger(object):
@@ -50,7 +51,7 @@ class Trigger(object):
         if not objects:
             return
 
-        if not is_iterable(objects):
+        if not is_iterable(objects) or isinstance(objects, SimpleLazyObject):
             objects = [objects]
 
         for obj in objects:
