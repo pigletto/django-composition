@@ -2,14 +2,21 @@
 
 from distutils.core import setup
 
+
 def get_description():
     import os
+    pth = os.path.join(
+        os.path.dirname(os.path.normpath(__file__)),
+        'README.md')
+
+    lines = []
+    with open(pth, 'r') as f:
+        lines = f.readlines()[1:]
+
     return "".join(
-        file(
-            os.path.join(os.path.dirname(os.path.normpath(__file__)),
-            'README.md'
-        ), 'r').readlines()[1:]
+        lines
     )
+
 
 setup(
     name="django-composition",
